@@ -1,7 +1,7 @@
 # 📚 Alice in Wonderland - RAG Application
 
 This project demonstrates a **Retrieval-Augmented Generation (RAG) application**.  
-The system ingests *Alice's Adventures in Wonderland* by Lewis Carroll (public domain ebook), processes it into embeddings, stores them in a vector database, and enables **context-aware question answering**.
+The system ingests *Alice's Adventures in Wonderland* by Lewis Carroll (public domain ebook), processes it into embeddings, stores them in a **Chroma vector database**, and enables **context-aware question answering** using the OpenAI API.
 
 ---
 
@@ -9,8 +9,8 @@ The system ingests *Alice's Adventures in Wonderland* by Lewis Carroll (public d
 
 - 📖 Uses **Alice in Wonderland** as the knowledge base  
 - 🧩 **Text chunking** for efficient retrieval  
-- 🔎 **Vector embeddings** to enable semantic search  
-- 📂 **Vector store (FAISS)** for storing and retrieving chunks  
+- 🔎 **Vector embeddings** with OpenAI  
+- 📂 **Chroma** as the vector store for retrieval  
 - ❓ Ask natural language questions about the book and get accurate, grounded answers  
 - 🔧 Fully customizable — swap datasets, embeddings, or models  
 
@@ -20,9 +20,8 @@ The system ingests *Alice's Adventures in Wonderland* by Lewis Carroll (public d
 
 - **Python 3.10+**  
 - **LangChain** – orchestration framework  
-- **FAISS** – vector store for retrieval  
-- **SentenceTransformers** – embeddings (`all-MiniLM-L6-v2`)  
-- **OpenAI API** – for LLM responses  
+- **Chroma** – vector store for retrieval  
+- **OpenAI API** – embeddings + LLM responses  
 - **Jupyter Notebook / Streamlit** – interface options  
 
 ---
@@ -48,15 +47,10 @@ alice-rag/
    Split the text into manageable chunks (e.g., 500 tokens).  
 
 3. **Generate Embeddings**  
-   Use `SentenceTransformers` to embed chunks.  
+   Use **OpenAIEmbeddings** for chunk embeddings.  
 
 4. **Store in Vector DB**  
-   Save embeddings in **FAISS** for fast similarity search.  
+   Save embeddings in **Chroma** for fast similarity search.  
 
 5. **Query**  
-   User asks a question → query is embedded → FAISS retrieves relevant passages → OpenAI API generates the final answer.  
-
-6. **Answer Generation**  
-   A local LLM (HuggingFace / Ollama) generates an answer grounded in retrieved passages.
-
----
+   User asks a question → query is embedded → Chroma retrieves relevant passages → OpenAI API generates the final answer.  
